@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Moody</title>
+</head>
+<body>
+    <div class="container">
+        <h1 class="title">Moody</h1>
+        <p class="subtitle">How are you feeling today?</p>
+        <div class="moods">
+            <div class="mood" *ngFor="let mood of moods" [attr.data-mood]="mood.name" (click)="setMood(mood.name)">
+                {{ mood.icon }} <span>{{ mood.name }}</span>
+            </div>
+        </div>
+        <button id="createPlaylist" class="hidden">Create Playlist</button>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
