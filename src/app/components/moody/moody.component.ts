@@ -8,6 +8,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./moody.component.scss']
 })
 export class MoodyComponent implements OnInit {
+  
   selectedMood: string | null = null;
 
   moods = [
@@ -37,10 +38,10 @@ export class MoodyComponent implements OnInit {
     // { name: 'Peaceful', icon: '☮️' }
   ];
   
-  
 
   setMood(mood: string) {
     this.selectedMood = mood;
+    console.log('You have selected', mood)
   }
 
   ngOnInit(): void {
