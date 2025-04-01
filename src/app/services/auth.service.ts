@@ -14,8 +14,10 @@ export class AuthService {
     return this.http.post(`${this.apiUrl}/signin`, credentials);
   }
 
+
   register(user: { name: string; email: string; password: string }): Observable<any> {
-    return this.http.post(`${this.apiUrl}/signup`, user);
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+    return this.http.post(`${this.apiUrl}/signup`, user, { headers });
   }
 
   logout() {

@@ -22,7 +22,7 @@ export class RegisterComponent {
     this.authService.register({name: this.name, email: this.email, password: this.password}).subscribe({
       next: (response)=>
       {
-        this.authService.saveToken(response.token);
+        this.authService.saveToken(response.access_token);
         this.router.navigate(['/dashboard']);
 
       },
