@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -32,10 +32,25 @@ export class AuthService {
 
   isAuthenticated(): boolean {
     const token = localStorage.getItem('token'); 
-    if (!token) {
+    console.log("Users token: ", localStorage.getItem('token'))
+    if (!token) return false;
+
+    try {
+      const payload = JSON.parse(atob(token.split('.')[1]));
+      return payload.exp * 1000 > Date.now(); 
+    } catch (e) {
       return false;
     }
-    const payload = JSON.parse(atob(token.split('.')[1]));
-    return payload.exp * 1000 > Date.now();
+  }
+
+  getHeaders() {
+    const token = localStorage.getItem('token');
+    return new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+  }
+
+  getProtectedData() {
+    return this.http.get(`${this.apiUrl}/protected`, { headers: this.getHeaders() });
   }
 }
