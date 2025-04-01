@@ -24,6 +24,12 @@ export const routes: Routes = [
     loadComponent: () => {
       return import('./components/moody/moody.component').then(m => m.MoodyComponent)
     }
+  },
+  {
+    path:'**',
+    loadComponent: () => {
+      return import('./components/not-found/not-found.component').then(m => m.NotFoundComponent)
+    },
   }
   
 ];

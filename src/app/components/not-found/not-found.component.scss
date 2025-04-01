@@ -1,0 +1,73 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+body {
+    background: #000;
+    color: white;
+    font-family: 'Press Start 2P', cursive;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    text-align: center;
+    flex-direction: column;
+}
+.glitch {
+    font-size: 100px;
+    position: relative;
+    text-transform: uppercase;
+    animation: glitch 1s infinite;
+}
+.glitch::before, .glitch::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0.75;
+}
+.glitch::before {
+    animation: glitchTop 1s infinite;
+    color: #ff00ff;
+}
+.glitch::after {
+    animation: glitchBottom 1s infinite;
+    color: #00ffff;
+}
+.subtext {
+    margin-top: -20px;
+    font-size: 14px;
+    opacity: 0.8;
+}
+.btn {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background: white;
+    color: black;
+    text-decoration: none;
+    display: inline-block;
+    border-radius: 5px;
+    transition: transform 0.2s;
+}
+.btn:hover {
+    transform: scale(1.1) rotate(2deg);
+    background: #ff00ff;
+    color: white;
+}
+
+@keyframes glitch {
+    0% { transform: skew(0deg); }
+    20% { transform: skew(-5deg); }
+    40% { transform: skew(5deg); }
+    60% { transform: skew(-3deg); }
+    80% { transform: skew(3deg); }
+    100% { transform: skew(0deg); }
+}
+@keyframes glitchTop {
+    0% { transform: translate(-2px, -2px); }
+    50% { transform: translate(2px, 2px); }
+    100% { transform: translate(-2px, -2px); }
+}
+@keyframes glitchBottom {
+    0% { transform: translate(2px, 2px); }
+    50% { transform: translate(-2px, -2px); }
+    100% { transform: translate(2px, 2px); }
+}

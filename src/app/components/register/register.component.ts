@@ -11,6 +11,7 @@ import { FormsModule } from '@angular/forms';
 })
 export class RegisterComponent {
 
+  name=""
   email=""
   password=""
 
@@ -18,7 +19,7 @@ export class RegisterComponent {
 
   register()
   {
-    this.authService.register({name: '', email: this.email, password: this.password}).subscribe({
+    this.authService.register({name: this.name, email: this.email, password: this.password}).subscribe({
       next: (response)=>
       {
         this.authService.saveToken(response.token);
