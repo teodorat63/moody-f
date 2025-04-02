@@ -20,7 +20,7 @@ export class LoginComponent {
   login() {
     this.authService.login({ email: this.email, password: this.password }).subscribe({
       next: (response) => {
-        this.authService.saveToken(response.token);
+        this.authService.saveToken(response.access_token);
         this.router.navigate(['/dashboard']);
       },
       error: (err) => console.error(err)

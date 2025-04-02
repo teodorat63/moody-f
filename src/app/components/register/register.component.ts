@@ -24,7 +24,6 @@ export class RegisterComponent {
       {
         this.authService.saveToken(response.access_token);
         this.router.navigate(['/dashboard']);
-
       },
       error: (err)=>  console.error(err)
     })
