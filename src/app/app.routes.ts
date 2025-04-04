@@ -5,12 +5,16 @@ import { MoodyComponent } from './components/moody/moody.component';
 import { authGuard } from './guards/auth.guard';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { noAuthGuard } from './guards/no-auth.guard';
+import { MyProfileComponent } from './components/my-profile/my-profile.component';
 
 export const routes: Routes = [
   { path: 'login', component: LoginComponent, canActivate:[noAuthGuard] },
   { path: 'register', component: RegisterComponent, canActivate: [noAuthGuard] },
   { path: 'dashboard', component: MoodyComponent, canActivate: [authGuard] }, 
-  { path: '**', component: NotFoundComponent } ]
+  { path: 'me', component:MyProfileComponent, canActivate: [authGuard]},
+  { path: '**', component: NotFoundComponent }
+  
+]
 
 
 // export const routes: Routes = [

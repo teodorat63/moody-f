@@ -39,15 +39,22 @@ export class MoodyComponent implements OnInit {
   ];
   
 
-  private clickSound = new Audio('/assets/click.wav')
+  private moodSound = new Audio('/assets/click.wav')
+  private createSound = new Audio('/assets/etheral-woosh.wav')
+
 
 
 
   setMood(mood: string) {
     this.selectedMood = mood;
     console.log('You have selected', mood)
-    this.clickSound.load();
-    this.clickSound.play();
+    this.moodSound.load();
+    this.moodSound.play();
+  }
+
+  createPlaylist(){
+    this.createSound.load();
+    this.createSound.play();
   }
 
   ngOnInit(): void {

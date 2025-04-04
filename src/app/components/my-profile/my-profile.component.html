@@ -1,0 +1,15 @@
+<body>
+
+  <div id="profile-info">
+    @if (isLoading) {
+      
+      Loading...
+    } @else {
+      
+      <p>Id: {{ data?.id }}</p>
+      <p>Name: {{ data?.name }}</p>
+      <p>Email: {{ data?.email }}</p>
+    }
+  </div>
+
+</body>
