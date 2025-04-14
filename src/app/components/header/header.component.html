@@ -1,5 +1,4 @@
-
-<div id="header"> 
+<div *ngIf="isLoggedIn" id="header"> 
   <button (click)="logout()">Log out</button>
   <button (click)="myProfile()"> My profile </button> 
 </div>

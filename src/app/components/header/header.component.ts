@@ -1,18 +1,27 @@
-import { Component } from '@angular/core';
+import { Component, DoCheck } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
 import { ApiService } from '../../services/api-service.service';
+import { CommonModule } from '@angular/common';
+
 
 @Component({
   selector: 'app-header',
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss'
 })
-export class HeaderComponent {
+export class HeaderComponent implements DoCheck {
 
-  constructor(private authService: AuthService, private router: Router, private apiService: ApiService){}
+  isLoggedIn: boolean
 
+  constructor(private authService: AuthService, private router: Router, private apiService: ApiService){
+    this.isLoggedIn = authService.isAuthenticated();
+  }
+
+  ngDoCheck(){
+    this.isLoggedIn = this.authService.isAuthenticated();
+  }
 
   logout() {
     this.authService.logout();
@@ -24,6 +33,4 @@ export class HeaderComponent {
     this.router.navigate(['/me']);
     
   }
-  
-
 }

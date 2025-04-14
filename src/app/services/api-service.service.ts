@@ -3,10 +3,16 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
 export interface UserProfile{
-  id: string;
+  id: number;
   name: string | null;
   email: string;
   createdAt: string;
+}
+
+export interface Mood{
+  id: number;
+  name: string;
+  emoji: string;
 }
 
 @Injectable({
@@ -20,6 +26,7 @@ export class ApiService {
 
   getHeaders() {
     const token = localStorage.getItem('token');
+    console.log("My token", token);
     return new HttpHeaders({
       'Authorization': `Bearer ${token}`
     });
@@ -27,6 +34,10 @@ export class ApiService {
 
   getProfile() {
     return this.http.get<UserProfile>(`${this.apiUrl}users/me`, { headers: this.getHeaders() });
+  }
+
+  getMoods(){
+    return this.http.get<Mood[]>(`${this.apiUrl}moods`)
   }
 
   
