@@ -38,7 +38,7 @@ export class MoodyComponent implements OnInit {
   private moodSound = new Audio('/assets/click.wav')
   private createSound = new Audio('/assets/etheral-woosh.wav')
   
-  selectedMood: string | null = null;
+  selectedMood: Mood | null = null;
 
   // moods = [
   //   { name: 'Happy', icon: '😊' },
@@ -70,10 +70,9 @@ export class MoodyComponent implements OnInit {
 
 
 
-
-  setMood(mood: string) {
+  setMood(mood: Mood) {
     this.selectedMood = mood;
-    console.log('You have selected', mood)
+    console.log('You have selected', mood.name)
     this.moodSound.load();
     this.moodSound.play();
   }
@@ -82,8 +81,8 @@ export class MoodyComponent implements OnInit {
     this.createSound.load();
     this.createSound.play();
 
-
-    this.router.navigate(['/generate'])
+    console.log('Moody is sending: ', this.selectedMood?.name)
+    this.router.navigate(['/generate'], {state: { playlistMood: this.selectedMood}})
   }
 
   

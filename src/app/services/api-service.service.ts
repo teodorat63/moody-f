@@ -15,6 +15,13 @@ export interface Mood{
   emoji: string;
 }
 
+export interface Song{
+  id: number;
+  title: string;
+  artist: string;
+  url: string;
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -38,6 +45,14 @@ export class ApiService {
 
   getMoods(){
     return this.http.get<Mood[]>(`${this.apiUrl}moods`)
+  }
+
+  getSongs(mood: Mood){
+    
+      return this.http.get<Song[]>(`${this.apiUrl}moods/${mood.id}/songs`)
+    
+    
+    
   }
 
   
