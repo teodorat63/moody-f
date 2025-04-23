@@ -42,11 +42,11 @@ h1 {
 
 .playlist {
   display: flex;
-  // flex-wrap: wrap; /* Allow the cards to wrap to new lines if needed */
+  //flex-wrap: wrap; /* Allow the cards to wrap to new lines if needed */
   justify-content: space-evenly; /* Center the cards horizontally */
   gap: 20px; /* Space between cards */
   width: 100%;
-  max-width: 1200px; /* Restrict max width of the playlist container */
+  
 }
 
 .song {
