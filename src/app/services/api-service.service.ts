@@ -47,13 +47,10 @@ export class ApiService {
     return this.http.get<Mood[]>(`${this.apiUrl}moods`)
   }
 
-  getSongs(mood: Mood){
-    
-      return this.http.get<Song[]>(`${this.apiUrl}moods/${mood.id}/songs`)
-    
-    
-    
+  getSongs(moodId: number): Observable<Song[]> {
+
+    return this.http.get<Song[]>(`${this.apiUrl}moods/${moodId}/songs`)
   }
 
-  
+
 }

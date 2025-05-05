@@ -1,5 +1,9 @@
 
-<div id = "title">
+<div *ngIf="loading$ | async" class="loading-spinner">
+  <p>Loading songs...</p>
+</div>
+
+<div *ngIf="loading$ | async" class="loading-spinner" id = "title">
   <h1>Your {{ playlistMood?.name }} Playlist is Ready!</h1>
   <p class="subtitle">Here are some tracks to match your vibe today.</p>
 
