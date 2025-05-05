@@ -1,15 +1,13 @@
 # 🎵 Moody Frontend - Mood-Based Playlist Generator
 
-Moody is a frontend Angular application that curates music playlists based on your current mood. Whether you're feeling happy, sad, energetic, or chill, Moody will match your vibe with the perfect tunes. 
+Moody is a frontend Angular application that generates music playlists based on your current mood.  
 
 > ⚙️ This frontend is designed to work **in tandem with the [Moody Backend](https://github.com/teodorat63/Moody)**, which handles user authentication, mood tracking, and playlist generation.
 
 ## 🛠️ Tech Stack
 
 - **Frontend:** Angular
-- **Authentication:** JSON Web Tokens (JWT)
-- **Styling:** CSS + Gradient Backgrounds
-- **Media:** Embedded YouTube videos
+
 
 ## 📸 Preview
 
@@ -30,15 +28,8 @@ Moody is a frontend Angular application that curates music playlists based on yo
 
 - 🧠 Mood-based playlist generation
 - 🎧 Auto-curated tracks from YouTube
-- 🔐 User authentication with JWT
 - 👤 Profile page to manage your details
 - 🌈 Bright, intuitive UI
 - 🔄 Ability to switch moods and refresh playlists anytime
 
-## 🛠️ Tech Stack
-
-- **Frontend:** Angular
-- **Authentication:** JSON Web Tokens (JWT)
-- **Styling:** CSS + Gradient Backgrounds
-- **Media:** Embedded YouTube videos
 
