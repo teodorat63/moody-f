@@ -10,12 +10,18 @@
         <h1 class="title">Moody</h1>
         <p class="subtitle">How are you feeling today?</p>
         <div class="moods">
-            <div class="mood" *ngFor="let mood of data" [attr.data-mood]="mood.name" [attr.data-selected]="selectedMood == mood" (click)="setMood(mood)">
-                {{ mood.emoji }} <span>{{ mood.name }}</span>
-            </div>
+          <div class="mood"
+          *ngFor="let mood of data"
+          [attr.data-mood]="mood.name"
+          [attr.data-selected]="selectedMood$ | async"
+          [ngClass]="{ 'selected': mood === (selectedMood$ | async) }"
+          (click)="setMood(mood)">
+          {{ mood.emoji }} <span>{{ mood.name }}</span>
+          </div>
+
         </div>
-        <button id="createPlaylis " (click)="createPlaylist()">Create Playlist</button>
+        <button id="createPlaylist " (click)="createPlaylist()">Create Playlist</button>
     </div>
-    
+
 </body>
 </html>

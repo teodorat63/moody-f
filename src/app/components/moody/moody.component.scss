@@ -31,6 +31,11 @@ body {
   margin-bottom: 20px;
 }
 
+.mood.selected {
+  background: white;
+  color: black;
+}
+
 .mood {
   display: flex;
   flex-direction: column;
@@ -54,10 +59,8 @@ body {
       transform: scale(1.1);
   }
 
-  &[data-selected='true']{
-    background: white;
-    color: black;
-  }
+
+
 }
 
 button {

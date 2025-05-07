@@ -1,7 +1,12 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { Router, RouterLink } from '@angular/router';
+import { Router } from '@angular/router';
 import { ApiService, Mood } from '../../services/api-service.service';
+import { Store } from '@ngrx/store';
+import { pickMood } from '../../store/mood/mood.actions';
+import { Observable } from 'rxjs';
+import { selectPickedMood } from '../../store/mood/mood.selector';
+import { AppState } from '../../store/app.state';
 
 @Component({
   selector: 'app-moody',
@@ -11,68 +16,37 @@ import { ApiService, Mood } from '../../services/api-service.service';
 })
 export class MoodyComponent implements OnInit {
 
-  constructor(private router: Router, private apiService: ApiService){}
+  selectedMood$: Observable<Mood | null>;
+
+  constructor(private router: Router, private apiService: ApiService, private store: Store<AppState>){
+    this.selectedMood$ = this.store.select(selectPickedMood);
+  }
 
   isLoading?: boolean;
   data?: Mood[];
-  
+
   ngOnInit(): void {
     this.isLoading = true;
     this.apiService.getMoods().subscribe(
       {
-        next: (response) =>
-        {
-          this.isLoading=false;
-          this.data=response;
+        next: (response) => {
+          this.isLoading = false;
+          this.data = response;
         },
         error: (err) => {
           this.isLoading = false;
-          console.error(err)
+          console.error(err);
         }
       }
     );
-    
   }
-  
 
-  private moodSound = new Audio('/assets/click.wav')
-  private createSound = new Audio('/assets/etheral-woosh.wav')
-  
-  selectedMood: Mood | null = null;
-
-  // moods = [
-  //   { name: 'Happy', icon: '😊' },
-  //   { name: 'Sad', icon: '😢' },
-  //   { name: 'Angry', icon: '😠' },
-  //   { name: 'Excited', icon: '🤩' },
-  //   { name: 'Relaxed', icon: '😌' },
-  //   { name: 'Confused', icon: '😕' },
-  //   { name: 'Surprised', icon: '😲' },
-  //   { name: 'Bored', icon: '😐' },
-  //   { name: 'Nervous', icon: '😬' },
-  //   { name: 'Tired', icon: '😴' },
-  //   { name: 'In Love', icon: '😍' },
-  //   { name: 'Grateful', icon: '🙏' },
-  //   { name: 'Proud', icon: '😎' },
-  //   { name: 'Scared', icon: '😨' },
-  //   { name: 'Silly', icon: '🤪' },
-  //   { name: 'Hopeful', icon: '🤞' },
-  //   // { name: 'Annoyed', icon: '🙄' },
-  //   // { name: 'Determined', icon: '💪' },
-  //   // { name: 'Lonely', icon: '🥺' },
-  //   // { name: 'Frustrated', icon: '😤' },
-  //   // { name: 'Shy', icon: '😊' },
-  //   // { name: 'Lazy', icon: '🛌' },
-  //   // { name: 'Sick', icon: '🤒' },
-  //   // { name: 'Peaceful', icon: '☮️' }
-  // ];
-  
-
-
+  private moodSound = new Audio('/assets/click.wav');
+  private createSound = new Audio('/assets/etheral-woosh.wav');
 
   setMood(mood: Mood) {
-    this.selectedMood = mood;
-    console.log('You have selected', mood.name)
+    console.log('You have selected', mood.name);
+    this.store.dispatch(pickMood({ mood }));
     this.moodSound.load();
     this.moodSound.play();
   }
@@ -81,9 +55,7 @@ export class MoodyComponent implements OnInit {
     this.createSound.load();
     this.createSound.play();
 
-    console.log('Moody is sending: ', this.selectedMood?.name)
-    this.router.navigate(['/generate'], {state: { playlistMood: this.selectedMood}})
+    console.log('Moody is sending: ', this.selectedMood$);
+    this.router.navigate(['/generate'], { state: { playlistMood: this.selectedMood$ } });
   }
-
-  
 }
