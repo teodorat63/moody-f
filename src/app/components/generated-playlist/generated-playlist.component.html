@@ -1,36 +1,39 @@
-<!--
-<div *ngIf="loading$ | async" class="loading-spinner">
+<!-- Example: show loading spinner if you later add loading$ -->
+<!-- <div *ngIf="loading$ | async" class="loading-spinner">
   <p>Loading songs...</p>
-</div>
+</div> -->
 
-<div *ngIf="loading$ | async" class="loading-spinner" id = "title">
-  <h1>Your {{ playlistMood?.name }} Playlist is Ready!</h1>
+<ng-container *ngIf="playlistMood$ | async as playlistMood">
+  <h1>Your {{ playlistMood.name }} Playlist is Ready!</h1>
   <p class="subtitle">Here are some tracks to match your vibe today.</p>
 
   <div class="mood-card">
-    <div style="font-size: 2.5em;">{{ playlistMood?.emoji }}</div>
-    <h2>{{ playlistMood?.name }}</h2>
+    <div style="font-size: 2.5em;">{{ playlistMood.emoji }}</div>
+    <h2>{{ playlistMood.name }}</h2>
     <p>Let the music match your energy!</p>
     <button (click)="changeMood()">Change Mood</button>
   </div>
-</div>
+</ng-container>
+
 <div class="playlist">
-  <div
-    class="song"
-    *ngFor="let song of data"
-    [attr.data-mood]="song.title"
-  >
-    <div class="song-info">
-      <strong>{{ song.title }}</strong><br />
-      <small>{{ song.artist }}</small>
+  <ng-container *ngIf="songs$ | async as songs">
+    <div
+      class="song"
+      *ngFor="let song of songs"
+      [attr.data-mood]="song.title"
+    >
+      <div class="song-info">
+        <strong>{{ song.title }}</strong><br />
+        <small>{{ song.artist }}</small>
+      </div>
+      <div class="embed">
+        <iframe
+          [src]="getSafeEmbedUrl(song.url)"
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen
+        ></iframe>
+      </div>
     </div>
-    <div class="embed">
-      <iframe
-        [src]="getSafeEmbedUrl(song.url)"
-        frameborder="0"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-        allowfullscreen
-      ></iframe>
-    </div>
-  </div>
-</div> -->
+  </ng-container>
+</div>

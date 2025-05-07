@@ -54,8 +54,6 @@ export class MoodyComponent implements OnInit {
   createPlaylist(){
     this.createSound.load();
     this.createSound.play();
-
-    console.log('Moody is sending: ', this.selectedMood$);
-    this.router.navigate(['/generate'], { state: { playlistMood: this.selectedMood$ } });
+    this.router.navigate(['/generate']);
   }
 }

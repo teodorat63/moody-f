@@ -3,12 +3,19 @@ import { SongState } from './song.reducer';
 import { AppState } from '../app.state';
 
 
-const selectSongs = (state: AppState) => state.songs;
+const selectSongState = (state: AppState) => state.song;
 
 export const selectAllSongs = createSelector(
-  selectSongs,
+  selectSongState,
   (state: SongState) => state.songs
 );
+
+
+// export const selectLoading = createSelector(
+//   selectSongState,
+//   (state) => state.loading
+// );
+
 
 // export const selectLoading = createSelector(
 //   selectSongState,
