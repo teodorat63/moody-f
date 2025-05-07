@@ -4,9 +4,9 @@ import { provideRouter } from '@angular/router';
 import { routes } from './app.routes';
 import { provideHttpClient } from '@angular/common/http';
 import { provideStore } from '@ngrx/store';
-import { songReducer } from './store/song.reducer';
+import { songReducer } from './store/song/song.reducer';
 import { provideEffects } from '@ngrx/effects';
-import { SongEffects } from './store/song.effect';
+import { SongEffects } from './store/song/song.effect';
 
 export const appConfig: ApplicationConfig = {
   providers: [
