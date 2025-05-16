@@ -1,18 +1,36 @@
 import { loadSongs, loadSongsSuccess, loadSongsFailure } from './song.actions';
 import { createReducer, on } from '@ngrx/store';
 import { Song } from '../../services/api-service.service';
+import {createEntityAdapter, EntityAdapter, EntityState} from '@ngrx/entity'
 
-export interface SongState {
-  songs: Song[];
+//Pre entity
+// export interface SongState {
+//   songs: Song[];
+//   loading: boolean;
+//   error: string | null;
+// }
+
+//bez adaptera
+// export const initialState: SongState = {
+//   ids: [],
+//   entities: {},
+//   loading: false,
+//   error: null
+// };
+
+
+//sa Entitity bibliotekom
+export interface SongState extends EntityState<Song>{
   loading: boolean;
   error: string | null;
 }
 
-export const initialState: SongState = {
-  songs: [],
+export const songAdapter: EntityAdapter<Song> = createEntityAdapter<Song>();
+
+export const initialState: SongState = songAdapter.getInitialState({
   loading: false,
-  error: null
-};
+  error: null,
+});
 
 export const songReducer = createReducer(
   initialState,
@@ -23,11 +41,13 @@ export const songReducer = createReducer(
     error: null
   })),
   //handle successfully loaded todos
-  on(loadSongsSuccess, (state, { songs }) => ({
-    ...state,
-    loading: false,
-    songs
-  })),
+  on(loadSongsSuccess, (state, { songs }) => {
+    return songAdapter.setAll(songs, {
+      ...state,
+      loading: false,
+      error: null,
+    });
+  }),
   //handle loading failure
   on(loadSongsFailure, (state, { error }) => ({
     ...state,

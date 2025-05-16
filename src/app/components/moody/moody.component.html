@@ -1,27 +1,26 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Moody</title>
-</head>
+
 <body>
-    <div class="container">
-        <h1 class="title">Moody</h1>
-        <p class="subtitle">How are you feeling today?</p>
-        <div class="moods">
-          <div class="mood"
-          *ngFor="let mood of data"
-          [attr.data-mood]="mood.name"
-          [attr.data-selected]="selectedMood$ | async"
-          [ngClass]="{ 'selected': mood === (selectedMood$ | async) }"
-          (click)="setMood(mood)">
-          {{ mood.emoji }} <span>{{ mood.name }}</span>
-          </div>
+<!-- Loading spinner -->
+<div *ngIf="loading$ | async; else moodList">
+  <p>Loading moods...</p>
+</div>
+<!-- Template for mood list -->
+ <ng-template #moodList>
+<div class="container">
+    <h1 class="title">Moody</h1>
+    <p class="subtitle">How are you feeling today?</p>
+    <div class="moods">
+      <div class="mood"
+      *ngFor="let mood of allMoods$ | async"
+      [attr.data-mood]="mood.name"
+      [attr.data-selected]="selectedMood$ | async"
+      [ngClass]="{ 'selected': mood === (selectedMood$ | async) }"
+      (click)="setMood(mood)">
+      {{ mood.emoji }} <span>{{ mood.name }}</span>
+      </div>
 
-        </div>
-        <button id="createPlaylist " (click)="createPlaylist()">Create Playlist</button>
     </div>
-
+    <button id="createPlaylist " (click)="createPlaylist()">Create Playlist</button>
+</div>
+</ng-template>
 </body>
-</html>

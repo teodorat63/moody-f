@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, firstValueFrom } from 'rxjs';
 
 export interface UserProfile{
   id: number;
@@ -48,9 +48,16 @@ export class ApiService {
   }
 
   getSongs(moodId: number): Observable<Song[]> {
-
-    return this.http.get<Song[]>(`${this.apiUrl}moods/${moodId}/songs`)
+    return this.http.get<Song[]>(`${this.apiUrl}moods/${moodId}/songs`);
   }
+
+
+
+// getSongs(moodId: number): Promise<Song[]> {
+//   return firstValueFrom(this.http.get<Song[]>(`${this.apiUrl}moods/${moodId}/songs`));
+// }
+
+
 
 
 }

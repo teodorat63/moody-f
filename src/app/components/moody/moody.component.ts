@@ -3,9 +3,9 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ApiService, Mood } from '../../services/api-service.service';
 import { Store } from '@ngrx/store';
-import { pickMood } from '../../store/mood/mood.actions';
-import { Observable } from 'rxjs';
-import { selectPickedMood } from '../../store/mood/mood.selector';
+import { loadMoods, pickMood } from '../../store/mood/mood.actions';
+import { Observable, map } from 'rxjs';
+import { selectAllMoods, selectMoodStatus, selectPickedMood } from '../../store/mood/mood.selector';
 import { AppState } from '../../store/app.state';
 
 @Component({
@@ -17,29 +17,23 @@ import { AppState } from '../../store/app.state';
 export class MoodyComponent implements OnInit {
 
   selectedMood$: Observable<Mood | null>;
+  allMoods$: Observable<Mood[]>;
+  loading$: Observable<boolean>;
 
   constructor(private router: Router, private apiService: ApiService, private store: Store<AppState>){
     this.selectedMood$ = this.store.select(selectPickedMood);
+    this.allMoods$ = this.store.select(selectAllMoods);
+    this.loading$ = this.store.select(selectMoodStatus).pipe(
+    map(status => status === 'loading')
+  );
   }
 
-  isLoading?: boolean;
-  data?: Mood[];
 
   ngOnInit(): void {
-    this.isLoading = true;
-    this.apiService.getMoods().subscribe(
-      {
-        next: (response) => {
-          this.isLoading = false;
-          this.data = response;
-        },
-        error: (err) => {
-          this.isLoading = false;
-          console.error(err);
-        }
-      }
-    );
+    this.store.dispatch(loadMoods());
+
   }
+
 
   private moodSound = new Audio('/assets/click.wav');
   private createSound = new Audio('/assets/etheral-woosh.wav');

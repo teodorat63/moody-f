@@ -6,3 +6,16 @@ export const pickMood = createAction(
   props<{ mood: Mood | null }>()
 );
 
+export const loadMoods = createAction(
+  '[Mood] Load Moods',
+);
+
+export const loadMoodsSuccess = createAction(
+  '[Mood] Load Moods Success',
+  props<{ moods: Mood[] }>()
+);
+
+export const loadMoodsFailure = createAction(
+  '[Mood] Load Moods Failure',
+  props<{ error: string }>()
+);

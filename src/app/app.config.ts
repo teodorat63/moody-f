@@ -9,11 +9,12 @@ import { moodReducer } from './store/mood/mood.reducer';
 import { provideEffects } from '@ngrx/effects';
 import { SongEffects } from './store/song/song.effect';
 import { provideStoreDevtools } from '@ngrx/store-devtools';
+import { MoodEffects } from './store/mood/mood.effect';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideStore({ song: songReducer, mood: moodReducer }),
-    provideEffects(SongEffects),
+    provideEffects(SongEffects, MoodEffects),
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
     provideHttpClient(),
