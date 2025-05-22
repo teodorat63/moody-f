@@ -6,7 +6,7 @@ Moody is a frontend Angular application that generates music playlists based on 
 
 ## 🛠️ Tech Stack
 
-- **Frontend:** Angular
+Angular with NgRx Store (including Entity adapters) for state management, NgRx Effects for handling side effects, and RxJS operators for reactive programming.
 
 
 ## 📸 Preview
