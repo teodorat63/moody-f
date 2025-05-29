@@ -1,0 +1,27 @@
+<div *ngIf="songs.length > 0" class="card">
+  <h3>{{ songs[currentSongIndex].title }}</h3>
+
+  <!-- <button (click)="prev()" [disabled]="currentSongIndex === 0">Prev</button> -->
+  <button (click)="togglePlay()">{{ isPlaying ? 'Pause' : 'Play' }}</button>
+  <!-- <button (click)="next()" [disabled]="currentSongIndex >= songs.length - 1">Next</button> -->
+
+  <input
+    type="range"
+    [max]="duration"
+    [value]="currentTime"
+    (input)="seek($event)"
+  />
+  <div>{{ formatTime(currentTime) }} / {{ formatTime(duration) }}</div>
+
+  <ul>
+    <li *ngFor="let song of songs; let i = index">
+      <button (click)="loadSong(i)">
+        ▶️ {{ song.title }}
+      </button>
+    </li>
+  </ul>
+</div>
+
+<div *ngIf="songs.length === 0">
+  Loading songs...
+</div>

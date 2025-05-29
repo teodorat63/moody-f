@@ -1,10 +1,18 @@
 
+
+#generatedPlaylist {
+  display: flex;
+  flex-direction: column;
+  align-items: center;     /* horizontal centering */
+
+}
+
+
 #title{
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-
 }
 
 h1 {
@@ -17,20 +25,7 @@ h1 {
   margin-bottom: 40px;
 }
 
-.mood-card {
-  background-color: rgba(255, 255, 255, 0.15);
-  padding: 30px;
-  border-radius: 20px;
-  margin-bottom: 60px;
-  width: 200px;
-  //display: inline-block;
-  text-align: center;
-}
-
-
-
-
-.mood-card button {
+button {
   background-color: #b388eb;
   color: white;
   border: none;
@@ -40,31 +35,7 @@ h1 {
   cursor: pointer;
 }
 
-.playlist {
-  display: flex;
-  //flex-wrap: wrap; /* Allow the cards to wrap to new lines if needed */
-  justify-content: space-evenly; /* Center the cards horizontally */
-  gap: 20px; /* Space between cards */
-  width: 100%;
-  
-}
 
-.song {
-  background-color: rgba(255, 255, 255, 0.1);
-  padding: 20px;
-  border-radius: 10px;
-  text-align: left;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
 
-.song-info {
-  margin-bottom: 15px;
-  font-size: 1.2em;
-}
 
-.embed iframe {
-  border-radius: 10px;
-  width: 100%;
-}
+

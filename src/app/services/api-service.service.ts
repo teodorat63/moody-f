@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, firstValueFrom } from 'rxjs';
+import { Observable, firstValueFrom, map } from 'rxjs';
 
 export interface UserProfile{
   id: number;
@@ -48,8 +48,13 @@ export class ApiService {
   }
 
   getSongs(moodId: number): Observable<Song[]> {
-    return this.http.get<Song[]>(`${this.apiUrl}moods/${moodId}/songs`);
-  }
+  return this.http.get<Song[]>(`${this.apiUrl}moods/${moodId}/songs`).pipe(
+    map(songs => songs.map(song => ({
+      ...song,
+      url: `http://localhost:3000/audio/${song.url}`
+    })))
+  );
+}
 
 
 

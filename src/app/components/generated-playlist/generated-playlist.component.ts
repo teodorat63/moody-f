@@ -9,10 +9,11 @@ import { Observable, take } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { loadSongs } from '../../store/song/song.actions';
 import { AppState } from '../../store/app.state';
+import { AudioPlayerComponent } from '../audio-player/audio-player.component';
 
 @Component({
   selector: 'app-generated-playlist',
-  imports: [CommonModule],
+  imports: [CommonModule, AudioPlayerComponent],
   templateUrl: './generated-playlist.component.html',
   styleUrl: './generated-playlist.component.scss'
 })

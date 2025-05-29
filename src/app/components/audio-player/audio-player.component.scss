@@ -1,0 +1,70 @@
+/* styles.css or component-specific CSS file */
+
+// div {
+//   font-family: 'Poppins', 'Segoe UI', sans-serif;
+//   background-color: rgba(255, 255, 255, 0.405); /* transparent white */
+//   backdrop-filter: blur(10px);
+//   border-radius: 16px;
+//   padding: 20px;
+//   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+//   color: #333;
+//   max-width: 400px;
+//   margin: 2rem auto;
+// }
+
+
+
+button {
+  background-color: #ff90e8;
+  border: none;
+  padding: 10px 16px;
+  margin: 8px 4px;
+  border-radius: 12px;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 1rem;
+}
+
+button:hover {
+  background-color: #ff60d6;
+  transform: scale(1.05);
+}
+
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+input[type="range"] {
+  width: 100%;
+  margin: 10px 0;
+  accent-color: #7f5af0;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin-top: 16px;
+}
+
+li {
+  margin: 6px 0;
+}
+
+li button {
+  background-color: #f1f1f1;
+  color: #222;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  width: 100%;
+  text-align: left;
+  padding: 8px;
+  font-size: 0.95rem;
+  transition: background-color 0.2s ease;
+}
+
+li button:hover {
+  background-color: #e0e0ff;
+}

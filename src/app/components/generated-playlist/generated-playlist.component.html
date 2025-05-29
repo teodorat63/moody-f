@@ -2,12 +2,12 @@
 <!-- <div *ngIf="loading$ | async" class="loading-spinner">
   <p>Loading songs...</p>
 </div> -->
-
+<div id="generatedPlaylist">
 <ng-container *ngIf="playlistMood$ | async as playlistMood">
   <h1>Your {{ playlistMood.name }} Playlist is Ready!</h1>
   <p class="subtitle">Here are some tracks to match your vibe today.</p>
 
-  <div class="mood-card">
+  <div class="card">
     <div style="font-size: 2.5em;">{{ playlistMood.emoji }}</div>
     <h2>{{ playlistMood.name }}</h2>
     <p>Let the music match your energy!</p>
@@ -15,25 +15,7 @@
   </div>
 </ng-container>
 
-<div class="playlist">
-  <ng-container *ngIf="songs$ | async as songs">
-    <div
-      class="song"
-      *ngFor="let song of songs"
-      [attr.data-mood]="song.title"
-    >
-      <div class="song-info">
-        <strong>{{ song.title }}</strong><br />
-        <small>{{ song.artist }}</small>
-      </div>
-      <div class="embed">
-        <iframe
-          [src]="getSafeEmbedUrl(song.url)"
-          frameborder="0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowfullscreen
-        ></iframe>
-      </div>
-    </div>
-  </ng-container>
+<ng-container *ngIf="songs$ | async as songs">
+  <app-audio-player [songs]="songs"></app-audio-player>
+</ng-container>
 </div>
