@@ -1,9 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
 
 body {
-    background: #000;
+
     color: white;
-    font-family: 'Press Start 2P', cursive;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -48,7 +47,7 @@ body {
     transition: transform 0.2s;
 }
 .btn:hover {
-    transform: scale(1.1) rotate(2deg);
+    transform: scale(1.1);
     background: #ff00ff;
     color: white;
 }

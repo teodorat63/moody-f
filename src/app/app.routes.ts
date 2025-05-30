@@ -9,13 +9,14 @@ import { MyProfileComponent } from './components/my-profile/my-profile.component
 import { GeneratedPlaylistComponent } from './components/generated-playlist/generated-playlist.component';
 
 export const routes: Routes = [
+  { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
   { path: 'login', component: LoginComponent, canActivate:[noAuthGuard] },
   { path: 'register', component: RegisterComponent, canActivate: [noAuthGuard] },
-  { path: 'dashboard', component: MoodyComponent, canActivate: [authGuard] }, 
+  { path: 'dashboard', component: MoodyComponent, canActivate: [authGuard] },
   { path: 'me', component:MyProfileComponent, canActivate: [authGuard]},
   { path: 'generate', component:GeneratedPlaylistComponent, canActivate: [authGuard]},
   { path: '**', component: NotFoundComponent }
-  
+
 ]
 
 
@@ -50,5 +51,5 @@ export const routes: Routes = [
 //       return import('./components/not-found/not-found.component').then(m => m.NotFoundComponent)
 //     },
 //   }
-  
+
 // ];

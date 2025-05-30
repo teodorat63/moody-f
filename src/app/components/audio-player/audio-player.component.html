@@ -1,5 +1,6 @@
 <div *ngIf="songs.length > 0" class="card">
   <h3>{{ songs[currentSongIndex].title }}</h3>
+  <h4>{{ songs[currentSongIndex].artist }}</h4>
 
   <button (click)="playPrevious()">Prev</button>
   <button (click)="togglePlay()">{{ isPlaying ? 'Pause' : 'Play' }}</button>
@@ -16,12 +17,12 @@
   <ul>
     <li *ngFor="let song of songs; let i = index">
       <button (click)="loadSong(i)">
-        ▶️ {{ song.title }}
+        ▶ {{ song.title }} - {{song.artist}}
       </button>
     </li>
   </ul>
 </div>
 
 <div *ngIf="songs.length === 0">
-  Loading songs...
+  No songs to show
 </div>
