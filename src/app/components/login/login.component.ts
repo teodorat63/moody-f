@@ -17,13 +17,24 @@ export class LoginComponent {
 
   constructor(private authService: AuthService, private router: Router) {}
 
+  errorMessage: string | null = null;
+
   login() {
+    this.errorMessage = null;  
     this.authService.login({ email: this.email, password: this.password }).subscribe({
       next: (response) => {
         this.authService.saveToken(response.access_token);
         this.router.navigate(['/dashboard']);
       },
-      error: (err) => console.error(err)
+      error: (err) => {
+        if (err.status === 400) {
+          this.errorMessage = "An unexpected error occurred. Please try again later.";
+        } else {
+          this.errorMessage = "Invalid email or password. Please try again.";
+        }
+        console.error(err);  
+      }
     });
   }
+
 }
