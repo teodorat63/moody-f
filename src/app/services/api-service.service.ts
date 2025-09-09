@@ -44,4 +44,15 @@ export class ApiService {
   // getSongs(moodId: number): Promise<Song[]> {
   //   return firstValueFrom(this.http.get<Song[]>(`${this.apiUrl}moods/${moodId}/songs`));
   // }
+
+  updateProfile(
+    id: string | number,
+    payload: Partial<Pick<UserProfile, 'name' | 'email'>>
+  ): Observable<UserProfile> {
+    return this.http.patch<UserProfile>(`${this.apiUrl}/users/${id}`, payload);
+  }
+
+  deleteProfile(id: string | number): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/users/${id}`);
+  }
 }

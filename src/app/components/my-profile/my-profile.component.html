@@ -1,15 +1,71 @@
 <body>
-
-  <div id="profile-info">
+  <div id="profile-info" class="profile">
     @if (isLoading) {
-      
-      Loading...
+    <p>Loading...</p>
+    } @else { @if (!data) {
+    <p>Nema učitanog profila.</p>
     } @else {
-      
-      <p>Id: {{ data?.id }}</p>
-      <p>Name: {{ data?.name }}</p>
-      <p>Email: {{ data?.email }}</p>
-    }
-  </div>
 
+    <!-- READONLY prikaz osnovnih info -->
+    <p>Id: {{ data?.id }}</p>
+
+    <!-- TEMPLATE-DRIVEN FORMA -->
+    <form #f="ngForm" (ngSubmit)="save(f)" novalidate>
+      <div class="field">
+        <label for="name">Name</label>
+        <input
+          id="name"
+          name="name"
+          type="text"
+          required
+          maxlength="100"
+          [(ngModel)]="formModel.name"
+          [disabled]="isSaving || isDeleting"
+          #name="ngModel"
+        />
+        @if (name.invalid && (name.touched || f.submitted)) {
+        <small class="error">Ime je obavezno (max 100).</small>
+        }
+      </div>
+
+      <div class="field">
+        <label for="email">Email</label>
+        <input
+          id="email"
+          name="email"
+          type="email"
+          required
+          email
+          [(ngModel)]="formModel.email"
+          [disabled]="isSaving || isDeleting"
+          #email="ngModel"
+        />
+        @if (email.invalid && (email.touched || f.submitted)) {
+        <small class="error">Unesi ispravan e-mail.</small>
+        }
+      </div>
+
+      <div class="actions">
+        <button type="submit" [disabled]="f.invalid || isSaving || isDeleting">
+          {{ isSaving ? "Čuvanje…" : "Sačuvaj" }}
+        </button>
+
+        <button
+          type="button"
+          class="danger"
+          (click)="delete()"
+          [disabled]="isSaving || isDeleting"
+        >
+          {{ isDeleting ? "Brisanje…" : "Obriši profil" }}
+        </button>
+      </div>
+
+      @if (successMsg) {
+      <p class="success">{{ successMsg }}</p>
+      } @if (errorMsg) {
+      <p class="error">{{ errorMsg }}</p>
+      }
+    </form>
+    } }
+  </div>
 </body>

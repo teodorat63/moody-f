@@ -16,3 +16,39 @@ body {
   backdrop-filter: blur(10px);
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
 }
+
+.profile {
+  max-width: 520px;
+  margin: 24px auto;
+}
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 14px;
+}
+.actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 12px;
+}
+button {
+  padding: 8px 14px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+}
+button.danger {
+  background: #e53935;
+  color: #fff;
+}
+button:not(.danger) {
+  background: #1976d2;
+  color: #fff;
+}
+.error {
+  color: #c62828;
+}
+.success {
+  color: #2e7d32;
+}
