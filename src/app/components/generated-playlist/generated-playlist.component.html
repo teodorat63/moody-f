@@ -1,7 +1,4 @@
-<!-- Example: show loading spinner if you later add loading$ -->
-<!-- <div *ngIf="loading$ | async" class="loading-spinner">
-  <p>Loading songs...</p>
-</div> -->
+
 <div id="generatedPlaylist">
 <ng-container *ngIf="playlistMood$ | async as playlistMood">
   <h1>Your {{ playlistMood.name }} Playlist is Ready!</h1>

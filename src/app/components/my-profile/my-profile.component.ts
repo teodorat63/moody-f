@@ -23,8 +23,8 @@ export class MyProfileComponent implements OnInit {
   errorMsg = '';
   successMsg = '';
 
-  data?: UserProfile; // iz backend-a (readonly prikaz / id)
-  formModel = { name: '', email: '' }; // ngModel forma
+  data?: UserProfile;
+  formModel = { name: '', email: '' };
 
   ngOnInit(): void {
     this.isLoading = true;
@@ -76,7 +76,7 @@ export class MyProfileComponent implements OnInit {
   delete() {
     if (!this.data?.id) return;
     const confirmed = window.confirm(
-      'Da li sigurno želiš da obrišeš svoj profil? Ova akcija je trajna.'
+      'Are you sure you want to delete your profile?'
     );
     if (!confirmed) return;
 
@@ -87,13 +87,11 @@ export class MyProfileComponent implements OnInit {
     this.apiService.deleteProfile(this.data.id).subscribe({
       next: () => {
         this.isDeleting = false;
-        this.successMsg = 'Profil je obrisan.';
         this.AuthService.logout();
         window.location.reload();
       },
       error: (err) => {
         console.error(err);
-        this.errorMsg = 'Brisanje nije uspelo.';
         this.isDeleting = false;
       },
     });

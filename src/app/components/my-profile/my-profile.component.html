@@ -3,13 +3,11 @@
     @if (isLoading) {
     <p>Loading...</p>
     } @else { @if (!data) {
-    <p>Nema učitanog profila.</p>
+    <p>Profile couldn't be loaded</p>
     } @else {
 
-    <!-- READONLY prikaz osnovnih info -->
     <p>Id: {{ data?.id }}</p>
 
-    <!-- TEMPLATE-DRIVEN FORMA -->
     <form #f="ngForm" (ngSubmit)="save(f)" novalidate>
       <div class="field">
         <label for="name">Name</label>
@@ -24,7 +22,7 @@
           #name="ngModel"
         />
         @if (name.invalid && (name.touched || f.submitted)) {
-        <small class="error">Ime je obavezno (max 100).</small>
+        <small class="error">Name is required</small>
         }
       </div>
 
@@ -41,13 +39,13 @@
           #email="ngModel"
         />
         @if (email.invalid && (email.touched || f.submitted)) {
-        <small class="error">Unesi ispravan e-mail.</small>
+        <small class="error">Enter valid e-mail.</small>
         }
       </div>
 
       <div class="actions">
         <button type="submit" [disabled]="f.invalid || isSaving || isDeleting">
-          {{ isSaving ? "Čuvanje…" : "Sačuvaj" }}
+          {{ isSaving ? "Saving…" : "Save" }}
         </button>
 
         <button
@@ -56,7 +54,7 @@
           (click)="delete()"
           [disabled]="isSaving || isDeleting"
         >
-          {{ isDeleting ? "Brisanje…" : "Obriši profil" }}
+          {{ isDeleting ? "Deleting…" : "Delete" }}
         </button>
       </div>
 
