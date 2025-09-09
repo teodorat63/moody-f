@@ -55,4 +55,8 @@ export class ApiService {
   deleteProfile(id: string | number): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/users/${id}`);
   }
+
+  createMood(payload: { name: string; emoji: string }): Observable<Mood> {
+    return this.http.post<Mood>(`${this.apiUrl}/moods`, payload);
+  }
 }
