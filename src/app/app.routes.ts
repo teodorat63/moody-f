@@ -9,46 +9,14 @@ import { MyProfileComponent } from './components/my-profile/my-profile.component
 import { GeneratedPlaylistComponent } from './components/generated-playlist/generated-playlist.component';
 
 export const routes: Routes = [
+  { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
   { path: 'login', component: LoginComponent, canActivate:[noAuthGuard] },
   { path: 'register', component: RegisterComponent, canActivate: [noAuthGuard] },
-  { path: 'dashboard', component: MoodyComponent, canActivate: [authGuard] }, 
+  { path: 'dashboard', component: MoodyComponent, canActivate: [authGuard] },
   { path: 'me', component:MyProfileComponent, canActivate: [authGuard]},
   { path: 'generate', component:GeneratedPlaylistComponent, canActivate: [authGuard]},
   { path: '**', component: NotFoundComponent }
-  
+
 ]
 
 
-// export const routes: Routes = [
-//   {path: '',
-//     pathMatch:'full',
-//     loadComponent: () => {
-//       return import('./components/moody/moody.component').then(m => m.MoodyComponent)
-//     }
-//   },
-//   {
-//     path:'login',
-//     loadComponent: () => {
-//       return import('./components/login/login.component').then(m => m.LoginComponent)
-//     }
-//   },
-//   {
-//     path:'register',
-//     loadComponent: () => {
-//       return import('./components/register/register.component').then(m => m.RegisterComponent)
-//     }
-//   },
-//   {
-//     path:'dashboard',
-//     loadComponent: () => {
-//       return import('./components/moody/moody.component').then(m => m.MoodyComponent)
-//     }
-//   },
-//   {
-//     path:'**',
-//     loadComponent: () => {
-//       return import('./components/not-found/not-found.component').then(m => m.NotFoundComponent)
-//     },
-//   }
-  
-// ];

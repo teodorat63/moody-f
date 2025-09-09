@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input, OnChanges } from '@angular/core';
+import { Component, Input, OnChanges, OnInit } from '@angular/core';
 
 export interface Song {
   title: string;
@@ -13,7 +13,7 @@ export interface Song {
   styleUrls: ['./audio-player.component.scss'],
   imports: [CommonModule]
 })
-export class AudioPlayerComponent implements OnChanges {
+export class AudioPlayerComponent implements OnInit {
   @Input() songs: Song[] = [];
   currentSongIndex = 0;
   audio = new Audio();
@@ -21,10 +21,28 @@ export class AudioPlayerComponent implements OnChanges {
   duration = 0;
   isPlaying = false;
 
-  ngOnChanges() {
+  ngOnInit() {
     if (this.songs.length > 0) {
       this.loadSong(0);
     }
+
+    this.audio.addEventListener('loadedmetadata', () => {
+    this.duration = this.audio.duration;
+    });
+
+    this.audio.addEventListener('timeupdate', () => {
+      this.currentTime = this.audio.currentTime;
+    });
+
+    this.audio.addEventListener('ended', () => {
+    this.playNext();
+  });
+  }
+
+  ngOnDestroy() {
+    this.audio.pause();
+    this.audio.src = '';
+    this.audio.load();
   }
 
   loadSong(index: number) {
@@ -33,6 +51,25 @@ export class AudioPlayerComponent implements OnChanges {
     this.audio.load();
     this.play();
   }
+
+  playNext() {
+    if(this.currentSongIndex < this.songs.length -1){
+      this.loadSong(this.currentSongIndex + 1);
+    }
+    else
+    {
+      this.loadSong(0);
+    }
+
+  }
+
+  playPrevious() {
+  const prevIndex = this.currentSongIndex - 1;
+  if (prevIndex >= 0) {
+    this.loadSong(prevIndex);
+  }
+}
+
 
   play() {
     this.audio.play();

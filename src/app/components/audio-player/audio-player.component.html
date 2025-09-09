@@ -1,9 +1,10 @@
 <div *ngIf="songs.length > 0" class="card">
   <h3>{{ songs[currentSongIndex].title }}</h3>
+  <h4>{{ songs[currentSongIndex].artist }}</h4>
 
-  <!-- <button (click)="prev()" [disabled]="currentSongIndex === 0">Prev</button> -->
+  <button (click)="playPrevious()">Prev</button>
   <button (click)="togglePlay()">{{ isPlaying ? 'Pause' : 'Play' }}</button>
-  <!-- <button (click)="next()" [disabled]="currentSongIndex >= songs.length - 1">Next</button> -->
+  <button (click)="playNext()" >Next</button>
 
   <input
     type="range"
@@ -16,12 +17,12 @@
   <ul>
     <li *ngFor="let song of songs; let i = index">
       <button (click)="loadSong(i)">
-        ▶️ {{ song.title }}
+        ▶ {{ song.title }} - {{song.artist}}
       </button>
     </li>
   </ul>
 </div>
 
 <div *ngIf="songs.length === 0">
-  Loading songs...
+  No songs to show
 </div>

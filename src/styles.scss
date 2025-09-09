@@ -20,3 +20,22 @@ body{
   text-align: center;
   margin: 10px;
 }
+
+button {
+  background: #ff4081;
+  border: none;
+  padding: 10px 20px;
+  font-size: 1.2rem;
+  color: white;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: background 0.3s;
+
+  &:hover {
+      background: #e91e63;
+  }
+
+  &.hidden {
+      display: none;
+  }
+}

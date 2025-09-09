@@ -31,6 +31,11 @@ export class HeaderComponent implements DoCheck {
 
   myProfile(){
     this.router.navigate(['/me']);
-    
+
+  }
+
+  home(){
+    this.router.navigate(['/']);
+
   }
 }
