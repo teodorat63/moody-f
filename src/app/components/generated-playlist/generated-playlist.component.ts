@@ -15,30 +15,29 @@ import { AudioPlayerComponent } from '../audio-player/audio-player.component';
   selector: 'app-generated-playlist',
   imports: [CommonModule, AudioPlayerComponent],
   templateUrl: './generated-playlist.component.html',
-  styleUrl: './generated-playlist.component.scss'
+  styleUrl: './generated-playlist.component.scss',
 })
 export class GeneratedPlaylistComponent implements OnInit {
-
-
-  constructor(private router: Router, private sanitizer: DomSanitizer, private store: Store<AppState>){
-  }
+  constructor(
+    private router: Router,
+    private sanitizer: DomSanitizer,
+    private store: Store<AppState>
+  ) {}
 
   playlistMood$!: Observable<Mood | null>;
   songs$!: Observable<Song[]>;
 
   ngOnInit(): void {
+    this.songs$ = this.store.select(selectAllSongs);
+    this.playlistMood$ = this.store.select(selectPickedMood);
 
-      this.songs$ = this.store.select(selectAllSongs);
-      this.playlistMood$ =  this.store.select(selectPickedMood);
-
-      // Get selected mood just once
-      this.playlistMood$.pipe(take(1)).subscribe(mood => {
-        if (mood) {
-          this.store.dispatch(loadSongs({ moodId: mood.id }));
-        }
-      });
-    }
-
+    // Get selected mood just once
+    this.playlistMood$.pipe(take(1)).subscribe((mood) => {
+      if (mood) {
+        this.store.dispatch(loadSongs({ moodId: mood.id }));
+      }
+    });
+  }
 
   getSafeEmbedUrl(url: string): SafeResourceUrl {
     const videoId = this.extractYouTubeId(url);
@@ -52,11 +51,7 @@ export class GeneratedPlaylistComponent implements OnInit {
     return match ? match[1] : '';
   }
 
-  changeMood(){
+  changeMood() {
     this.router.navigate(['/dashboard']);
-
   }
-
-
-
 }
