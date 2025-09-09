@@ -1,7 +1,7 @@
 import { loadSongs, loadSongsSuccess, loadSongsFailure } from './song.actions';
 import { createReducer, on } from '@ngrx/store';
-import { Song } from '../../services/api-service.service';
 import {createEntityAdapter, EntityAdapter, EntityState} from '@ngrx/entity'
+import { Song } from '../../models';
 
 //Pre entity
 // export interface SongState {

@@ -1,5 +1,5 @@
 import { createAction, props } from "@ngrx/store";
-import { Mood } from "../../services/api-service.service";
+import { Mood } from "../../models";
 
 export const pickMood = createAction(
   '[Mood] Pick mood',

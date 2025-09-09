@@ -1,7 +1,7 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { SongState } from './song.reducer';
 import { AppState } from '../app.state';
-import { Song } from '../../services/api-service.service';
+import { Song } from '../../models';
 
 
 const selectSongState = (state: AppState) => state.song;

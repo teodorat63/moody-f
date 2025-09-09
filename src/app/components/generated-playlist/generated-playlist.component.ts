@@ -1,7 +1,6 @@
 import { selectMood, selectPickedMood } from './../../store/mood/mood.selector';
 import { selectAllSongs } from './../../store/song/song.selectors';
 import { Component, OnInit } from '@angular/core';
-import { ApiService, Mood, Song } from '../../services/api-service.service';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
@@ -10,6 +9,7 @@ import { Store } from '@ngrx/store';
 import { loadSongs } from '../../store/song/song.actions';
 import { AppState } from '../../store/app.state';
 import { AudioPlayerComponent } from '../audio-player/audio-player.component';
+import { Mood, Song } from '../../models';
 
 @Component({
   selector: 'app-generated-playlist',

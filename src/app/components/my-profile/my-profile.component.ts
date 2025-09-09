@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ApiService, UserProfile } from '../../services/api-service.service';
+import { ApiService } from '../../services/api-service.service';
 import { catchError, map, of, startWith } from 'rxjs';
+import { UserProfile } from '../../models';
 
 @Component({
   selector: 'app-my-profile',
@@ -30,7 +31,7 @@ export class MyProfileComponent implements OnInit{
         }
       }
     );
-    
+
   }
 
 }

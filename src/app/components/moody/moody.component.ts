@@ -1,12 +1,13 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { ApiService, Mood } from '../../services/api-service.service';
 import { Store } from '@ngrx/store';
 import { loadMoods, pickMood } from '../../store/mood/mood.actions';
 import { Observable, map } from 'rxjs';
 import { selectAllMoods, selectMoodStatus, selectPickedMood } from '../../store/mood/mood.selector';
 import { AppState } from '../../store/app.state';
+import { Mood } from '../../models';
+import { ApiService } from '../../services/api-service.service';
 
 @Component({
   selector: 'app-moody',
