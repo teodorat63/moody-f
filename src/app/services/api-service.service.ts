@@ -14,7 +14,6 @@ export class ApiService {
 
   getHeaders() {
     const token = localStorage.getItem('token');
-    console.log('My token', token);
     return new HttpHeaders({
       Authorization: `Bearer ${token}`,
     });
