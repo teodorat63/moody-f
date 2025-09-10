@@ -1,0 +1,11 @@
+<div class="trending-widget">
+  <h2>🔥 Trending Moods</h2>
+
+  <ol *ngIf="trendingMoods$ | async as moods">
+    <li *ngFor="let mood of moods">
+      <span class="emoji">{{ mood.emoji }}</span>
+      <span class="name">{{ mood.name }}</span>
+      <span class="count">{{ mood.userCount }} users</span>
+    </li>
+  </ol>
+</div>

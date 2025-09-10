@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, firstValueFrom, map } from 'rxjs';
+import { Observable, firstValueFrom, forkJoin, map, switchMap } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { Mood, Song, UserProfile } from '../models';
 
@@ -58,5 +58,34 @@ export class ApiService {
 
   createMood(payload: { name: string; emoji: string }): Observable<Mood> {
     return this.http.post<Mood>(`${this.apiUrl}/moods`, payload);
+  }
+
+  getUsersByMood(moodId: number) {
+    return this.http.get<UserProfile[]>(
+      `${this.apiUrl}/users/${moodId}/users`,
+      {
+        headers: this.getHeaders(),
+      }
+    );
+  }
+
+  getTrendingMoods() {
+    //observable svih raspolozenja
+    return this.getMoods().pipe(
+      switchMap((moods) => {
+        //brojimo koliko korisnika ima svako raspolozenje
+        const requests = moods.map((mood) =>
+          this.getUsersByMood(mood.id).pipe(
+            map((users) => ({
+              ...mood,
+              userCount: users.length,
+            }))
+          )
+        );
+        return forkJoin(requests);
+      }),
+      //sortiraj
+      map((moodStats) => moodStats.sort((a, b) => b.userCount - a.userCount))
+    );
   }
 }
